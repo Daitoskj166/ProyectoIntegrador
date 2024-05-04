@@ -30,7 +30,7 @@
 		<Button fx:id="buttonIngreso" layoutX="150.0" layoutY="347.0" mnemonicParsing="false" onAction="#FacturaVista" onMouseClicked="#clickIngreso" text="Ingreso" />
       <ImageView fitHeight="132.0" fitWidth="128.0" layoutX="112.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../Pictures/png-transparent-login-user-avatar-person-users-profile-free-system-and-user-interface-icon.png" />
+            <Image url="@../../../../../Pictures/png-transparent-login-user-avatar-person-users-profile-free-system-and-user-interface-icon.png" />
          </image>
       </ImageView>
 	</children>

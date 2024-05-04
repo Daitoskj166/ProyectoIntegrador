@@ -7,25 +7,25 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 
-public class FacturaVistaController {
+public class ProductoController {
 
     @FXML
-    private TableColumn<?, ?> ColumnIdFactura;
+    private TableColumn<?, ?> ColumnCantidad;
 
     @FXML
     private TableColumn<?, ?> ColumnIdUsuario;
 
     @FXML
-    private TableColumn<?, ?> ColumnIdVenta;
-
-    @FXML
-    private TableColumn<?, ?> ColumnIva;
+    private TableColumn<?, ?> ColumnNombre;
 
     @FXML
     private TableColumn<?, ?> ColumnReferenciaProducto;
 
     @FXML
-    private TableColumn<?, ?> ColumnSubtotal;
+    private TableColumn<?, ?> ColumnValorTotal;
+
+    @FXML
+    private TableColumn<?, ?> ColumnvalorUnitario;
 
     @FXML
     private Button buttonActualizar;
@@ -34,22 +34,22 @@ public class FacturaVistaController {
     private Button buttonCrear;
 
     @FXML
-    private TextField textIdFactura;
+    private TextField textCantidad;
 
     @FXML
     private TextField textIdUsuario;
 
     @FXML
-    private TextField textIdVenta;
-
-    @FXML
-    private TextField textIva;
+    private TextField textNombre;
 
     @FXML
     private TextField textReferenciaProducto;
 
     @FXML
-    private TextField textSubtotal;
+    private TextField textValorTotal;
+
+    @FXML
+    private TextField textValorUnitario;
 
     @FXML
     void ColumnIdFactura(ActionEvent event) {
@@ -119,31 +119,6 @@ public class FacturaVistaController {
     @FXML
     void insertIdFactura(MouseEvent event) {
 
-    }
-    
-    @FXML
-    private void initialize() {
-        
-        cargarFacturas();
-    }
-
-    @FXML
-    private void agregarFactura() {
-        
-    }
-
-    @FXML
-    private void editarFactura() {
-        
-    }
-
-    @FXML
-    private void eliminarFactura() {
-        
-    }
-
-    private void cargarFacturas() {
-        
     }
 
 }
