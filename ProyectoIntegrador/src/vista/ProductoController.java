@@ -9,7 +9,7 @@ import javafx.scene.input.MouseEvent;
 
 public class ProductoController {
 
-    @FXML
+    @FXML 
     private TableColumn<?, ?> ColumnCantidad;
 
     @FXML

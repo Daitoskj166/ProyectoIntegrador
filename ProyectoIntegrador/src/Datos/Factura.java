@@ -19,6 +19,7 @@ public class Factura {
 		this.idVenta = idVenta;
 	}
 
+
 	public String getIdFactura() {
 		return idFactura;
 	}
