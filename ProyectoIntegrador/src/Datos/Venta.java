@@ -11,7 +11,7 @@ public class Venta {
 	private String codigoVendedor;
 	private String precioVenta;
 
-	public Venta(String idVenta, String fechaVenta, String notas, String idUsuario, String referenciaProducto, String codigoVendedor, String precioVenta, String metodoPago) {
+	public Venta(String idVenta, String fechaVenta, String notas, String idUsuario, String referenciaProducto, String codigoVendedor, String metodoPago, String precioVenta) {
 		
 		this.idVenta = idVenta;
 		this.fechaVenta = fechaVenta;

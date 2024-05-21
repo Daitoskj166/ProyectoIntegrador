@@ -1,4 +1,4 @@
-Datos factura
+Datos Vendedor
 package Datos;
 
 import java.sql.Connection;
@@ -9,27 +9,32 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 
-public class DatosFactura {
+public class DatosVendedor {
     private static final String URL = "jdbc:oracle:thin:@localhost:1521:orcl";
     private static final String USER = "pasabocasAntojitos";
     private static final String PASSWORD = "pasabocasAntojitos";
 
-    public LinkedList<Factura> getDatos() {
-        LinkedList<Factura> data = new LinkedList<>();
+    public LinkedList<vendedor> getDatos() {
+        LinkedList<vendedor> data = new LinkedList<>();
         try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
-             PreparedStatement st = conn.prepareStatement("SELECT * FROM PRODUCTO");
+             PreparedStatement st = conn.prepareStatement("SELECT * FROM VENDEDOR");
              ResultSet result = st.executeQuery()) {
         	
             while (result.next()) {
-            	Factura factura = new Factura(
-                        result.getString("idFactura"),
-                        result.getString("subtotal"),
-                        result.getString("iva"),
-                        result.getString("referenciaProducto"),
-                        result.getString("idUsuario"),
-                        result.getString("idVenta")
+            	vendedor vendedor = new vendedor(
+                        result.getString("codigoVendedor"),
+                        result.getString("nombre"),
+                        result.getString("apellido"),
+                        result.getString("telefono"),
+                        result.getString("direccion"),
+                        result.getString("fechaContratacion"),
+                        result.getString("salario"),
+                        result.getString("comision"),
+                        result.getString("estado"),
+                        result.getString("idUsuario")
+     
                 );
-                data.add(factura);
+                data.add(vendedor);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -37,17 +42,20 @@ public class DatosFactura {
         return data;
     }
 
-    public void guardarFactura(Factura factura) {
-        String sql = "INSERT INTO FACTURA (idFactura, subtotal, iva, referenciaProducto, idUsuario, idVenta) VALUES (?, ?, ?, ?, ?, ?)";
+    public void guardarVendedor(vendedor vendedor) {
+        String sql = "INSERT INTO VENDEDOR (codigoVendedor, nombre, apellido, telefono, fechaContratacion, salario, comision, estado, idUsuario) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, factura.getIdFactura());
-            pstmt.setString(2, factura.getSubtotal());
-            pstmt.setString(3, factura.getIva());
-            pstmt.setString(4, factura.getReferenciaProducto());
-            pstmt.setString(5, factura.getIdUsuario());
-            pstmt.setString(6, factura.getIdVenta());
+            pstmt.setString(1, vendedor.getCodigoVendedor());
+            pstmt.setString(2, vendedor.getNombre());
+            pstmt.setString(3, vendedor.getApellido());
+            pstmt.setString(4, vendedor.getTelefono());
+            pstmt.setString(5, vendedor.getFechaContratacion());
+            pstmt.setString(6, vendedor.getSalario());
+            pstmt.setString(7, vendedor.getComision());
+            pstmt.setString(8, vendedor.getEstado());
+            pstmt.setString(9, vendedor.getIdUsuario());
             
             pstmt.executeUpdate();
             System.out.println("Factura guardado correctamente en la base de datos.");
@@ -57,16 +65,16 @@ public class DatosFactura {
     
     }
 
-    public void eliminarFactura(String idFactura) {
+    public void eliminarVendedor(String idVendedor) {
         try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
-             PreparedStatement st = conn.prepareStatement("DELETE FROM FACTURA WHERE idFactura = ?")) {
+             PreparedStatement st = conn.prepareStatement("DELETE FROM VENDEDOR WHERE idFactura = ?")) {
 
-            st.setString(1, idFactura);
+            st.setString(1, idVendedor);
             st.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
+    }s
 
     public void actualizarFactura(Factura factura) {
         String sql = "UPDATE FACTURA SET idFactura = ?, subtotal = ?, iva = ?, referenciaProducto = ? WHERE idUsuario = ?, WHERE idVenta = ?";
