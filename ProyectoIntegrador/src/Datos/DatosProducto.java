@@ -79,7 +79,7 @@ public class DatosProducto {
             pstmt.setString(5, producto.getValorTotal());
             pstmt.setString(6, producto.getIdUsuario());
             
-
+            //`prueba
             pstmt.executeUpdate();
             System.out.println("Producto actualizado correctamente en la base de datos.");
         } catch (SQLException e) {
