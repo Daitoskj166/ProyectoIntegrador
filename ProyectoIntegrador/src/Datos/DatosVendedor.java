@@ -1,4 +1,3 @@
-Datos Vendedor
 package Datos;
 
 import java.sql.Connection;
@@ -58,41 +57,44 @@ public class DatosVendedor {
             pstmt.setString(9, vendedor.getIdUsuario());
             
             pstmt.executeUpdate();
-            System.out.println("Factura guardado correctamente en la base de datos.");
+            System.out.println("Vendedor guardado correctamente en la base de datos.");
         } catch (SQLException e) {
-            System.out.println("Error al guardar el factura en la base de datos: " + e.getMessage());
+            System.out.println("Error al guardar el vendedor en la base de datos: " + e.getMessage());
         }
     
     }
 
-    public void eliminarVendedor(String idVendedor) {
+    public void eliminarVendedor(String codigoVendedor) {
         try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
-             PreparedStatement st = conn.prepareStatement("DELETE FROM VENDEDOR WHERE idFactura = ?")) {
+             PreparedStatement st = conn.prepareStatement("DELETE FROM VENDEDOR WHERE codigoVendedor = ?")) {
 
-            st.setString(1, idVendedor);
+            st.setString(1, codigoVendedor);
             st.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }s
+    }
 
-    public void actualizarFactura(Factura factura) {
-        String sql = "UPDATE FACTURA SET idFactura = ?, subtotal = ?, iva = ?, referenciaProducto = ? WHERE idUsuario = ?, WHERE idVenta = ?";
+    public void actualizarVendedor(vendedor vendedor) {
+        String sql = "UPDATE  SET codigoVendedor = ?, nombre = ?, apellido = ?, telefono = ? WHERE fechaContratacion = ?, WHERE salario = ?, WHERE comision = ?, WHERE estado = ?, WHERE idUsuario = ?";
 
         try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-        	pstmt.setString(1, factura.getIdFactura());
-            pstmt.setString(2, factura.getSubtotal());
-            pstmt.setString(3, factura.getIva());
-            pstmt.setString(4, factura.getReferenciaProducto());
-            pstmt.setString(5, factura.getIdUsuario());
-            pstmt.setString(6, factura.getIdVenta());
+        	pstmt.setString(1, vendedor.getCodigoVendedor());
+            pstmt.setString(2, vendedor.getNombre());
+            pstmt.setString(3, vendedor.getApellido());
+            pstmt.setString(4, vendedor.getTelefono());
+            pstmt.setString(5, vendedor.getFechaContratacion());
+            pstmt.setString(6, vendedor.getSalario());
+            pstmt.setString(7, vendedor.getComision());
+            pstmt.setString(8, vendedor.getEstado());
+            pstmt.setString(9, vendedor.getIdUsuario());
             
 
             pstmt.executeUpdate();
-            System.out.println("Producto actualizado correctamente en la base de datos.");
+            System.out.println("Vendedor actualizado correctamente en la base de datos.");
         } catch (SQLException e) {
-            System.out.println("Error al actualizar el factura en la base de datos: " + e.getMessage());
+            System.out.println("Error al actualizar el vendedor en la base de datos: " + e.getMessage());
         	}
     }
 }

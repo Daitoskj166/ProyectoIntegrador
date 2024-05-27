@@ -1,4 +1,3 @@
-Datos factura
 package Datos;
 
 import java.sql.Connection;
@@ -17,7 +16,7 @@ public class DatosFactura {
     public LinkedList<Factura> getDatos() {
         LinkedList<Factura> data = new LinkedList<>();
         try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
-             PreparedStatement st = conn.prepareStatement("SELECT * FROM PRODUCTO");
+             PreparedStatement st = conn.prepareStatement("SELECT * FROM FACTURA");
              ResultSet result = st.executeQuery()) {
         	
             while (result.next()) {
@@ -82,7 +81,7 @@ public class DatosFactura {
             
 
             pstmt.executeUpdate();
-            System.out.println("Producto actualizado correctamente en la base de datos.");
+            System.out.println("Factura actualizado correctamente en la base de datos.");
         } catch (SQLException e) {
             System.out.println("Error al actualizar el factura en la base de datos: " + e.getMessage());
         	}
