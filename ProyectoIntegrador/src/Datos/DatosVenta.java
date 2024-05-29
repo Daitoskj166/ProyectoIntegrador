@@ -6,7 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
-import java.util.List;
 
 public class DatosVenta {
     private static final String URL = "jdbc:oracle:thin:@localhost:1521:orcl";
@@ -73,24 +72,24 @@ public class DatosVenta {
     }
 
     public void actualizarVenta(Venta venta) {
-        String sql = "UPDATE VENTA SET idVenta = ?, fechaVenta = ?, notas = ?, idUsuario = ? WHERE referenciaProducto = ?, WHERE codigoVendedor = ?, WHERE metodoPago = ?, WHERE precioVenta = ?";
+        String sql = "UPDATE VENTA SET idVenta = ?, fechaVenta = ?, notas = ?, idUsuario = ?, metodoPago = ?, precioVenta = ? WHERE referenciaProducto = ? AND codigoVendedor = ?";
 
         try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-        	pstmt.setString(1, venta.getIdVenta());
+             
+            pstmt.setString(1, venta.getIdVenta());
             pstmt.setString(2, venta.getFechaVenta());
             pstmt.setString(3, venta.getNotas());
             pstmt.setString(4, venta.getIdUsuario());
-            pstmt.setString(5, venta.getReferenciaProducto());
-            pstmt.setString(6, venta.getCodigoVendedor());
-            pstmt.setString(7, venta.getMetodoPago());
-            pstmt.setString(8, venta.getPrecioVenta());
-            
+            pstmt.setString(5, venta.getMetodoPago());
+            pstmt.setString(6, venta.getPrecioVenta());
+            pstmt.setString(7, venta.getReferenciaProducto());
+            pstmt.setString(8, venta.getCodigoVendedor());
 
             pstmt.executeUpdate();
-            System.out.println("Venta actualizado correctamente en la base de datos.");
+            System.out.println("Venta actualizada correctamente en la base de datos.");
         } catch (SQLException e) {
             System.out.println("Error al actualizar la venta en la base de datos: " + e.getMessage());
-        	}
-    }
+        }
+    }
 }

@@ -6,7 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
-import java.util.List;
 
 public class DatosFactura {
     private static final String URL = "jdbc:oracle:thin:@localhost:1521:orcl";
@@ -68,22 +67,22 @@ public class DatosFactura {
     }
 
     public void actualizarFactura(Factura factura) {
-        String sql = "UPDATE FACTURA SET idFactura = ?, subtotal = ?, iva = ?, referenciaProducto = ? WHERE idUsuario = ?, WHERE idVenta = ?";
+        String sql = "UPDATE FACTURA SET idFactura = ?, subtotal = ?, iva = ?, referenciaProducto = ? WHERE idUsuario = ? AND idVenta = ?";
 
         try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-        	pstmt.setString(1, factura.getIdFactura());
+             
+            pstmt.setString(1, factura.getIdFactura());
             pstmt.setString(2, factura.getSubtotal());
             pstmt.setString(3, factura.getIva());
             pstmt.setString(4, factura.getReferenciaProducto());
             pstmt.setString(5, factura.getIdUsuario());
             pstmt.setString(6, factura.getIdVenta());
-            
 
             pstmt.executeUpdate();
-            System.out.println("Factura actualizado correctamente en la base de datos.");
+            System.out.println("Factura actualizada correctamente en la base de datos.");
         } catch (SQLException e) {
-            System.out.println("Error al actualizar el factura en la base de datos: " + e.getMessage());
-        	}
-    }
+            System.out.println("Error al actualizar la factura en la base de datos: " + e.getMessage());
+        }
+    }
 }

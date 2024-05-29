@@ -6,7 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
-import java.util.List;
 
 public class DatosProducto {
     private static final String URL = "jdbc:oracle:thin:@localhost:1521:orcl";
@@ -68,22 +67,22 @@ public class DatosProducto {
     }
 
     public void actualizarProducto(Producto producto) {
-        String sql = "UPDATE PRODUCTO SET referenciaProducto = ?, nombre = ?, cantidad = ?, valorUnitario = ? WHERE valorTotal = ?, WHERE idUsuario = ?";
+        String sql = "UPDATE PRODUCTO SET referenciaProducto = ?, nombre = ?, cantidad = ?, valorUnitario = ?, valorTotal = ? WHERE idUsuario = ?";
 
         try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-        	pstmt.setString(1, producto.getReferenciaProducto());
+             
+            pstmt.setString(1, producto.getReferenciaProducto());
             pstmt.setString(2, producto.getNombre());
             pstmt.setString(3, producto.getCantidad());
             pstmt.setString(4, producto.getValorUnitario());
             pstmt.setString(5, producto.getValorTotal());
             pstmt.setString(6, producto.getIdUsuario());
-            
-          
+
             pstmt.executeUpdate();
             System.out.println("Producto actualizado correctamente en la base de datos.");
         } catch (SQLException e) {
             System.out.println("Error al actualizar el producto en la base de datos: " + e.getMessage());
-        	}
-    }
+        }
+    }
 }

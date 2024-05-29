@@ -6,7 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
-import java.util.List;
 
 public class DatosVendedor {
     private static final String URL = "jdbc:oracle:thin:@localhost:1521:orcl";
@@ -76,11 +75,12 @@ public class DatosVendedor {
     }
 
     public void actualizarVendedor(vendedor vendedor) {
-        String sql = "UPDATE  SET codigoVendedor = ?, nombre = ?, apellido = ?, telefono = ? WHERE fechaContratacion = ?, WHERE salario = ?, WHERE comision = ?, WHERE estado = ?, WHERE idUsuario = ?";
+        String sql = "UPDATE VENDEDOR SET codigoVendedor = ?, nombre = ?, apellido = ?, telefono = ?, fechaContratacion = ?, salario = ?, comision = ?, estado = ? WHERE idUsuario = ?";
 
         try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-        	pstmt.setString(1, vendedor.getCodigoVendedor());
+             
+            pstmt.setString(1, vendedor.getCodigoVendedor());
             pstmt.setString(2, vendedor.getNombre());
             pstmt.setString(3, vendedor.getApellido());
             pstmt.setString(4, vendedor.getTelefono());
@@ -89,12 +89,11 @@ public class DatosVendedor {
             pstmt.setString(7, vendedor.getComision());
             pstmt.setString(8, vendedor.getEstado());
             pstmt.setString(9, vendedor.getIdUsuario());
-            
 
             pstmt.executeUpdate();
             System.out.println("Vendedor actualizado correctamente en la base de datos.");
         } catch (SQLException e) {
             System.out.println("Error al actualizar el vendedor en la base de datos: " + e.getMessage());
-        	}
-    }
+        }
+    }
 }

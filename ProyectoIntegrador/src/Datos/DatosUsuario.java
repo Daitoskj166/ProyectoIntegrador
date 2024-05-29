@@ -6,7 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
-import java.util.List;
 
 public class DatosUsuario {
     private static final String URL = "jdbc:oracle:thin:@localhost:1521:orcl";
@@ -64,20 +63,20 @@ public class DatosUsuario {
     }
 
     public void actualizarUsuario(Usuario usuario) {
-        String sql = "UPDATE USUARIO SET idUsuario = ?, nombreUsuario = ?, contraseña = ?";
+        String sql = "UPDATE USUARIO SET nombreUsuario = ?, contraseña = ? WHERE idUsuario = ?";
 
         try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-        	pstmt.setString(1, usuario.getIdUsuario());
-            pstmt.setString(2, usuario.getNombreUsuario());
-            pstmt.setString(3, usuario.getContraseña());
-       
-            
+             
+            pstmt.setString(1, usuario.getNombreUsuario());
+            pstmt.setString(2, usuario.getContraseña());
+            pstmt.setString(3, usuario.getIdUsuario());
 
             pstmt.executeUpdate();
             System.out.println("Usuario actualizado correctamente en la base de datos.");
         } catch (SQLException e) {
             System.out.println("Error al actualizar el usuario en la base de datos: " + e.getMessage());
-        	}
-    }
+        }
+    }
+    
 }
