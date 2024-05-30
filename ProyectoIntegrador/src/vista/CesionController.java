@@ -11,7 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import datos.DatosUsuario;
+import Datos.DatosUsuario;
 
 public class CesionController {
 
@@ -28,7 +28,7 @@ public class CesionController {
 
     @FXML
     void facturavista(ActionEvent event) {
-      
+        
     }
 
     @FXML
@@ -37,7 +37,6 @@ public class CesionController {
         String password = textContraseña.getText();
         
         if (datosUsuario.validarUsuario(username, password)) {
-         
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("FacturaVista.fxml"));
                 Parent root = loader.load();
@@ -48,7 +47,6 @@ public class CesionController {
                 e.printStackTrace();
             }
         } else {
-           
             Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Error de Autenticación");
             alert.setHeaderText(null);

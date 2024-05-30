@@ -75,7 +75,7 @@ public class DatosVendedor {
     }
 
     public void actualizarVendedor(vendedor vendedor) {
-        String sql = "UPDATE VENDEDOR SET codigoVendedor = ?, nombre = ?, apellido = ?, telefono = ?, fechaContratacion = ?, salario = ?, comision = ?, estado = ? WHERE idUsuario = ?";
+        String sql = "UPDATE VENDEDOR SET idUsuario = ?, nombre = ?, apellido = ?, telefono = ?, fechaContratacion = ?, salario = ?, comision = ?, estado = ? WHERE codigoVendedor = ?";
 
         try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {

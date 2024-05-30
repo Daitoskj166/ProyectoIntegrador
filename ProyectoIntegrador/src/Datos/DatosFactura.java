@@ -67,7 +67,7 @@ public class DatosFactura {
     }
 
     public void actualizarFactura(Factura factura) {
-        String sql = "UPDATE FACTURA SET idFactura = ?, subtotal = ?, iva = ?, referenciaProducto = ? WHERE idUsuario = ? AND idVenta = ?";
+        String sql = "UPDATE FACTURA SET idUsuario = ?, subtotal = ?, iva = ?, referenciaProducto = ? WHERE idFactura = ? AND idVenta = ?";
 
         try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {

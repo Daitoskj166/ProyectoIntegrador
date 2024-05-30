@@ -67,7 +67,7 @@ public class DatosProducto {
     }
 
     public void actualizarProducto(Producto producto) {
-        String sql = "UPDATE PRODUCTO SET referenciaProducto = ?, nombre = ?, cantidad = ?, valorUnitario = ?, valorTotal = ? WHERE idUsuario = ?";
+        String sql = "UPDATE PRODUCTO SET idUsuario = ?, nombre = ?, cantidad = ?, valorUnitario = ?, valorTotal = ? WHERE idUsuarioreferenciaProducto = ?";
 
         try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {

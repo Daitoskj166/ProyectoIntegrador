@@ -79,4 +79,25 @@ public class DatosUsuario {
         }
     }
     
+    public boolean validarUsuario(String username, String password) {
+        String sql = "SELECT * FROM USUARIO WHERE nombreUsuario = ? AND contraseña = ?";
+        
+        try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+             
+            pstmt.setString(1, username);
+            pstmt.setString(2, password);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                  
+                    return true;
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al validar el usuario en la base de datos: " + e.getMessage());
+        }
+        return false; 
+    }
 }
+    
+
