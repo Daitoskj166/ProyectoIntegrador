@@ -1,31 +1,46 @@
 package vista;
 
-import javafx.event.ActionEvent;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.control.cell.PropertyValueFactory;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import Datos.Factura;
 
 public class FacturaVistaController {
 
     @FXML
-    private TableColumn<?, ?> ColumnIdFactura;
+    private TableView<Factura> tableFacturas;
 
     @FXML
-    private TableColumn<?, ?> ColumnIdUsuario;
+    private TableColumn<Factura, String> ColumnIdFactura;
 
     @FXML
-    private TableColumn<?, ?> ColumnIdVenta;
+    private TableColumn<Factura, String> ColumnIdUsuario;
 
     @FXML
-    private TableColumn<?, ?> ColumnIva;
+    private TableColumn<Factura, String> ColumnIdVenta;
 
     @FXML
-    private TableColumn<?, ?> ColumnReferenciaProducto;
+    private TableColumn<Factura, String> ColumnIva;
 
     @FXML
-    private TableColumn<?, ?> ColumnSubtotal;
+    private TableColumn<Factura, String> ColumnReferenciaProducto;
+
+    @FXML
+    private TableColumn<Factura, String> ColumnSubtotal;
 
     @FXML
     private Button buttonActualizar;
@@ -51,99 +66,108 @@ public class FacturaVistaController {
     @FXML
     private TextField textSubtotal;
 
-    @FXML
-    void ColumnIdFactura(ActionEvent event) {
-
-    }
-
-    @FXML
-    void ColumnIdUsuario(ActionEvent event) {
-
-    }
-
-    @FXML
-    void ColumnIdVenta(ActionEvent event) {
-
-    }
-
-    @FXML
-    void ColumnIva(ActionEvent event) {
-
-    }
-
-    @FXML
-    void ColumnReferenciaProducto(ActionEvent event) {
-
-    }
-
-    @FXML
-    void ColumnSubtotal(ActionEvent event) {
-
-    }
-
-    @FXML
-    void InsertIdUsuario(MouseEvent event) {
-
-    }
-
-    @FXML
-    void InsertIdVenta(MouseEvent event) {
-
-    }
-
-    @FXML
-    void InsertIva(MouseEvent event) {
-
-    }
-
-    @FXML
-    void InsertReferenciaProducto(MouseEvent event) {
-
-    }
-
-    @FXML
-    void InsertSubtotal(MouseEvent event) {
-
-    }
+    private ObservableList<Factura> facturas;
 
     @FXML
     void clickActualizar(MouseEvent event) {
-
+        actualizarFactura();
     }
 
     @FXML
     void clickCrear(MouseEvent event) {
-
+        crearFactura();
     }
 
-    @FXML
-    void insertIdFactura(MouseEvent event) {
-
-    }
-    
     @FXML
     private void initialize() {
-        
+        configurarColumnas();
+        facturas = FXCollections.observableArrayList();
+        tableFacturas.setItems(facturas);
         cargarFacturas();
     }
 
-    @FXML
-    private void agregarFactura() {
-        
-    }
-
-    @FXML
-    private void editarFactura() {
-        
-    }
-
-    @FXML
-    private void eliminarFactura() {
-        
+    private void configurarColumnas() {
+        ColumnIdFactura.setCellValueFactory(new PropertyValueFactory<>("idFactura"));
+        ColumnIdUsuario.setCellValueFactory(new PropertyValueFactory<>("idUsuario"));
+        ColumnIdVenta.setCellValueFactory(new PropertyValueFactory<>("idVenta"));
+        ColumnIva.setCellValueFactory(new PropertyValueFactory<>("iva"));
+        ColumnReferenciaProducto.setCellValueFactory(new PropertyValueFactory<>("referenciaProducto"));
+        ColumnSubtotal.setCellValueFactory(new PropertyValueFactory<>("subtotal"));
     }
 
     private void cargarFacturas() {
-        
+        facturas.clear();
+        Connection conn = getConnection();
+        Statement st;
+        ResultSet rs;
+        try {
+            st = conn.createStatement();
+            String query = "SELECT idFactura, idUsuario, idVenta, iva, referenciaProducto, subtotal FROM FACTURA";
+            rs = st.executeQuery(query);
+
+            while (rs.next()) {
+                Factura factura = new Factura(
+                        rs.getString("idFactura"),
+                        rs.getString("idUsuario"),
+                        rs.getString("idVenta"),
+                        rs.getString("iva"),
+                        rs.getString("referenciaProducto"),
+                        rs.getString("subtotal")
+                );
+                facturas.add(factura);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
+    private void crearFactura() {
+        Connection conn = getConnection();
+        try {
+            String query = "INSERT INTO FACTURA (idFactura, idUsuario, idVenta, iva, referenciaProducto, subtotal) VALUES (?, ?, ?, ?, ?, ?)";
+            PreparedStatement pst = conn.prepareStatement(query);
+            pst.setString(1, textIdFactura.getText());
+            pst.setString(2, textIdUsuario.getText());
+            pst.setString(3, textIdVenta.getText());
+            pst.setString(4, textIva.getText());
+            pst.setString(5, textReferenciaProducto.getText());
+            pst.setString(6, textSubtotal.getText());
+            pst.executeUpdate();
+            cargarFacturas();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void actualizarFactura() {
+        Connection conn = getConnection();
+        try {
+            String query = "UPDATE FACTURA SET idUsuario = ?, idVenta = ?, iva = ?, referenciaProducto = ?, subtotal = ? WHERE idFactura = ?";
+            PreparedStatement pst = conn.prepareStatement(query);
+            pst.setString(1, textIdUsuario.getText());
+            pst.setString(2, textIdVenta.getText());
+            pst.setString(3, textIva.getText());
+            pst.setString(4, textReferenciaProducto.getText());
+            pst.setString(5, textSubtotal.getText());
+            pst.setString(6, textIdFactura.getText());
+            pst.executeUpdate();
+            cargarFacturas();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private Connection getConnection() {
+        try {
+            // Cambia los parámetros de conexión según tu configuración
+            String url = "jdbc:oracle:thin:@localhost";
+            String user = "pasabocasAntojitos";
+            String password = "pasabocasAntojitos";
+            return DriverManager.getConnection(url, user, password);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }
+
