@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -24,19 +25,22 @@ public class CesionController {
     @FXML
     private TextField textUser;
 
+    @FXML
+    private ImageView image;
+
     private DatosUsuario datosUsuario = new DatosUsuario();
 
     @FXML
     void facturavista(ActionEvent event) {
-        
+        // Acción al realizar el evento
     }
 
     @FXML
     void clickIngreso(MouseEvent event) {
-        String username = textUser.getText();
-        String password = textContraseña.getText();
+        String nombreUsuario = textUser.getText();
+        String contrasena = textContraseña.getText();
         
-        if (datosUsuario.validarUsuario(username, password)) {
+        if (datosUsuario.validarUsuario(nombreUsuario, contrasena)) {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("FacturaVista.fxml"));
                 Parent root = loader.load();
