@@ -42,7 +42,7 @@ public class CesionController {
         
         if (datosUsuario.validarUsuario(nombreUsuario, contrasena)) {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("FacturaVista.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("MenuPrincipal.fxml"));
                 Parent root = loader.load();
                 Stage stage = (Stage) buttonIngreso.getScene().getWindow();
                 stage.setScene(new Scene(root));
