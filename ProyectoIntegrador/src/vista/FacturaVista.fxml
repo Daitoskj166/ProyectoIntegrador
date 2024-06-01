@@ -7,31 +7,38 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="427.0" prefWidth="611.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.FacturaVistaController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.FacturaVistaController">
    <children>
-      <TableView fx:id="tableFacturas" layoutX="-4.0" prefHeight="295.0" prefWidth="616.0">
+      <TableView fx:id="tableFacturas" layoutX="10.0" layoutY="10.0" prefHeight="350.0" prefWidth="780.0">
         <columns>
-          <TableColumn fx:id="ColumnIdFactura" prefWidth="87.0" text="IDFACTURA" />
-          <TableColumn fx:id="ColumnSubtotal" prefWidth="89.0" text="SUBTOTAL" />
+          <TableColumn fx:id="ColumnIdFactura" prefWidth="100.0" text="IDFACTURA" />
+          <TableColumn fx:id="ColumnSubtotal" prefWidth="100.0" text="SUBTOTAL" />
           <TableColumn fx:id="ColumnIva" prefWidth="100.0" text="IVA" />
-          <TableColumn fx:id="ColumnReferenciaProducto" prefWidth="148.0" text="REFERENCIAPRODUCTO" />
-          <TableColumn fx:id="ColumnIdUsuario" prefWidth="92.0" text="IDUSUARIO" />
-          <TableColumn fx:id="ColumnIdVenta" prefWidth="107.0" text="IDVENTA" />
+          <TableColumn fx:id="ColumnReferenciaProducto" prefWidth="130.0" text="REFERENCIAPRODUCTO" />
+          <TableColumn fx:id="ColumnIdUsuario" prefWidth="100.0" text="IDUSUARIO" />
+          <TableColumn fx:id="ColumnIdVenta" prefWidth="100.0" text="IDVENTA" />
+          <TableColumn fx:id="ColumnMetodoPago" prefWidth="100.0" text="METODOPAGO" />
+          <TableColumn fx:id="ColumnNotas" prefWidth="150.0" text="NOTAS" />
         </columns>
       </TableView>
-      <TextField fx:id="textIdFactura" layoutX="85.0" layoutY="306.0" prefHeight="25.0" prefWidth="109.0" />
-      <Text layoutX="29.0" layoutY="323.0" strokeType="OUTSIDE" strokeWidth="0.0" text="IdFactura" />
-      <Text layoutX="215.0" layoutY="323.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Subtotal" />
-      <TextField fx:id="textSubtotal" layoutX="272.0" layoutY="306.0" prefHeight="25.0" prefWidth="94.0" />
-      <TextField fx:id="textIva" layoutX="85.0" layoutY="341.0" prefHeight="25.0" prefWidth="109.0" />
-      <Text layoutX="29.0" layoutY="358.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Iva" />
-      <Text layoutX="218.0" layoutY="358.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ReferenciaProducto" wrappingWidth="108.90234375" />
-      <TextField fx:id="textReferenciaProducto" layoutX="327.0" layoutY="341.0" prefHeight="25.0" prefWidth="94.0" />
-      <Text layoutX="436.0" layoutY="323.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Idusuario" />
-      <TextField fx:id="textIdUsuario" layoutX="495.0" layoutY="306.0" prefHeight="25.0" prefWidth="94.0" />
-      <Text layoutX="436.0" layoutY="358.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Idventa" />
-      <TextField fx:id="textIdVenta" layoutX="495.0" layoutY="341.0" prefHeight="25.0" prefWidth="94.0" />
-      <Button fx:id="buttonCrear" layoutX="196.0" layoutY="382.0" mnemonicParsing="false" onMouseClicked="#clickCrear" text="Crear" />
-      <Button fx:id="buttonActualizar" layoutX="332.0" layoutY="382.0" mnemonicParsing="false" onMouseClicked="#clickActualizar" text="Actualizar" />
+      <TextField fx:id="textIdFactura" layoutX="85.0" layoutY="370.0" prefHeight="25.0" prefWidth="109.0" />
+      <Text layoutX="29.0" layoutY="388.0" strokeType="OUTSIDE" strokeWidth="0.0" text="IdFactura" />
+      <Text layoutX="215.0" layoutY="388.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Subtotal" />
+      <TextField fx:id="textSubtotal" layoutX="272.0" layoutY="370.0" prefHeight="25.0" prefWidth="94.0" />
+      <TextField fx:id="textIva" layoutX="85.0" layoutY="410.0" prefHeight="25.0" prefWidth="109.0" />
+      <Text layoutX="29.0" layoutY="428.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Iva" />
+      <Text layoutX="218.0" layoutY="428.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ReferenciaProducto" wrappingWidth="108.90234375" />
+      <TextField fx:id="textReferenciaProducto" layoutX="327.0" layoutY="410.0" prefHeight="25.0" prefWidth="94.0" />
+      <Text layoutX="436.0" layoutY="388.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Idusuario" />
+      <TextField fx:id="textIdUsuario" layoutX="495.0" layoutY="370.0" prefHeight="25.0" prefWidth="94.0" />
+      <Text layoutX="436.0" layoutY="428.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Idventa" />
+      <TextField fx:id="textIdVenta" layoutX="495.0" layoutY="410.0" prefHeight="25.0" prefWidth="94.0" />
+      <Text layoutX="29.0" layoutY="468.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Método de Pago" />
+      <TextField fx:id="textMetodoPago" layoutX="127.0" layoutY="450.0" prefHeight="25.0" prefWidth="94.0" />
+      <Text layoutX="29.0" layoutY="508.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Notas" />
+      <TextField fx:id="textNotas" layoutX="127.0" layoutY="490.0" prefHeight="25.0" prefWidth="94.0" />
+      <Button fx:id="buttonCrear" layoutX="196.0" layoutY="530.0" mnemonicParsing="false" onMouseClicked="#clickCrear" text="Crear" />
+      <Button fx:id="buttonActualizar" layoutX="332.0" layoutY="530.0" mnemonicParsing="false" onMouseClicked="#clickActualizar" text="Actualizar" />
    </children>
 </AnchorPane>
+

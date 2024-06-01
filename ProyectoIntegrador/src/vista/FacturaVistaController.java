@@ -124,16 +124,28 @@ public class FacturaVistaController {
     private void crearFactura() {
         Connection conn = getConnection();
         try {
+            // Crear una nueva venta antes de insertar la factura
+            String idVenta = generarIdVenta(); // Generar un nuevo idVenta único
+            crearVenta(idVenta);
+
             String query = "INSERT INTO FACTURA (idFactura, idUsuario, idVenta, iva, referenciaProducto, subtotal) VALUES (?, ?, ?, ?, ?, ?)";
             PreparedStatement pst = conn.prepareStatement(query);
-            pst.setString(1, textIdFactura.getText());
-            pst.setString(2, textIdUsuario.getText());
-            pst.setString(3, textIdVenta.getText());
-            pst.setString(4, textIva.getText());
-            pst.setString(5, textReferenciaProducto.getText());
-            pst.setString(6, textSubtotal.getText());
+            String idFactura = textIdFactura.getText();
+            String idUsuario = textIdUsuario.getText();
+            String iva = textIva.getText();
+            String referenciaProducto = textReferenciaProducto.getText();
+            String subtotal = textSubtotal.getText();
+
+            System.out.println("Valores a insertar: " + idFactura + ", " + idUsuario + ", " + idVenta + ", " + iva + ", " + referenciaProducto + ", " + subtotal);
+
+            pst.setString(1, idFactura);
+            pst.setString(2, idUsuario);
+            pst.setString(3, idVenta);
+            pst.setString(4, iva);
+            pst.setString(5, referenciaProducto);
+            pst.setString(6, subtotal);
             pst.executeUpdate();
-            cargarFacturas();
+            cargarFacturas(); // Refresca la tabla después de la inserción
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -151,16 +163,32 @@ public class FacturaVistaController {
             pst.setString(5, textSubtotal.getText());
             pst.setString(6, textIdFactura.getText());
             pst.executeUpdate();
-            cargarFacturas();
+            cargarFacturas(); // Refresca la tabla después de la actualización
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
+    private void crearVenta(String idVenta) {
+        Connection conn = getConnection();
+        try {
+            String query = "INSERT INTO VENTA (idVenta, fechaVenta) VALUES (?, SYSDATE)";
+            PreparedStatement pst = conn.prepareStatement(query);
+            pst.setString(1, idVenta);
+            pst.executeUpdate();
+            System.out.println("Venta con id " + idVenta + " creada.");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private String generarIdVenta() {
+        return "v_" + (int) (Math.random() * 10000); // Generar un idVenta único
+    }
+
     private Connection getConnection() {
         try {
-            // Cambia los parámetros de conexión según tu configuración
-            String url = "jdbc:oracle:thin:@localhost";
+            String url = "jdbc:oracle:thin:@localhost:1521:xe"; // Ajusta esto según tu configuración
             String user = "pasabocasAntojitos";
             String password = "pasabocasAntojitos";
             return DriverManager.getConnection(url, user, password);
@@ -170,4 +198,3 @@ public class FacturaVistaController {
         }
     }
 }
-

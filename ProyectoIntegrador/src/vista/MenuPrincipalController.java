@@ -33,9 +33,7 @@ public class MenuPrincipalController {
 
     @FXML
     void ingresoReporte(MouseEvent event) {
-        // Puedes ajustar este método para abrir una vista específica para los reportes si la tienes.
-        // abrirVentana("ReporteView.fxml", "Gestión de Reportes");
-        System.out.println("Funcionalidad de reportes aún no implementada");
+    	abrirVentana("ReportesVista.fxml", "Gestión de Reportes");
     }
 
     private void abrirVentana(String fxmlFile, String title) {

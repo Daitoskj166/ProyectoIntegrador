@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 
 public class DatosVenta {
-    private static final String URL = "jdbc:oracle:thin:@localhost:1521:orcl";
+    private static final String URL = "jdbc:oracle:thin:@localhost";
     private static final String USER = "pasabocasAntojitos";
     private static final String PASSWORD = "pasabocasAntojitos";
 

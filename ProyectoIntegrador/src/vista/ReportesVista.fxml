@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.XYChart?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.ReportesVistaController">
+    <children>
+        <Text layoutX="20.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Generación de Reportes" />
+        <PieChart fx:id="pieChartComisiones" layoutX="20.0" layoutY="40.0" prefHeight="200.0" prefWidth="300.0" title="Comisiones Pagadas" />
+        <BarChart fx:id="barChartVentas" layoutX="340.0" layoutY="40.0" prefHeight="200.0" prefWidth="400.0">
+            <xAxis>
+                <CategoryAxis label="Categoría" />
+            </xAxis>
+            <yAxis>
+                <NumberAxis label="Cantidad" />
+            </yAxis>
+        </BarChart>
+        <LineChart fx:id="lineChartTendencia" layoutX="20.0" layoutY="260.0" prefHeight="200.0" prefWidth="720.0">
+            <xAxis>
+                <CategoryAxis label="Periodo" />
+            </xAxis>
+            <yAxis>
+                <NumberAxis label="Ventas" />
+            </yAxis>
+        </LineChart>
+        <Button fx:id="buttonGenerarReportes" layoutX="20.0" layoutY="470.0" mnemonicParsing="false" text="Generar Reportes" onAction="#generarReportes"/>
+    </children>
+</AnchorPane>
