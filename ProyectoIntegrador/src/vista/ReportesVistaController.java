@@ -44,7 +44,7 @@ public class ReportesVistaController {
     }
 
     private void generarDatosPieChart() {
-        try (Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost", "usuario", "contraseña")) {
+        try (Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl", "usuario", "contraseña")) {
             String query = "SELECT vendedor, SUM(comision) AS total_comision FROM ventas GROUP BY vendedor";
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(query);
@@ -61,7 +61,7 @@ public class ReportesVistaController {
     }
 
     private void generarDatosBarChart() {
-        try (Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost", "usuario", "contraseña")) {
+        try (Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl", "usuario", "contraseña")) {
             String query = "SELECT producto, SUM(cantidad) AS total_ventas FROM ventas GROUP BY producto";
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(query);
@@ -82,7 +82,7 @@ public class ReportesVistaController {
     }
 
     private void generarDatosLineChart() {
-        try (Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost", "usuario", "contraseña")) {
+        try (Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl", "usuario", "contraseña")) {
             String query = "SELECT TO_CHAR(fecha, 'YYYY-MM') AS periodo, SUM(total) AS total_ventas FROM ventas GROUP BY TO_CHAR(fecha, 'YYYY-MM') ORDER BY TO_CHAR(fecha, 'YYYY-MM')";
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(query);

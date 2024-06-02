@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 
 public class DatosFactura {
-    private static final String URL = "jdbc:oracle:thin:@localhost:1521:orcl";
+    private static final String URL = "jdbc:oracle:thin:@localhost:1521:orcll";
     private static final String USER = "pasabocasAntojitos";
     private static final String PASSWORD = "pasabocasAntojitos";
 
@@ -37,7 +37,7 @@ public class DatosFactura {
 
     public void guardarFactura(Factura factura) {
         String sql = "INSERT INTO FACTURA (idFactura, subtotal, iva, referenciaProducto, idUsuario, idVenta) VALUES (?, ?, ?, ?, ?, ?)";
-        boolean añadirFactura
+       
         try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, factura.getIdFactura());
