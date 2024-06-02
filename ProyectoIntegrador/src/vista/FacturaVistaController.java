@@ -189,8 +189,8 @@ public class FacturaVistaController {
     private Connection getConnection() {
         try {
             String url = "jdbc:oracle:thin:@localhost:1521:orcl"; // Ajusta esto según tu configuración
-            String user = "pasabocasAntojitos";
-            String password = "pasabocasAntojitos";
+            String user = "pasabocaAntojitos";
+            String password = "pasabocaAntojitos";
             return DriverManager.getConnection(url, user, password);
         } catch (SQLException e) {
             e.printStackTrace();

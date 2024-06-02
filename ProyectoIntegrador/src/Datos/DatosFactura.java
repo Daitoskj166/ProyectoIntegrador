@@ -9,8 +9,8 @@ import java.util.LinkedList;
 
 public class DatosFactura {
     private static final String URL = "jdbc:oracle:thin:@localhost:1521:orcll";
-    private static final String USER = "pasabocasAntojitos";
-    private static final String PASSWORD = "pasabocasAntojitos";
+    private static final String USER = "pasabocaAntojitos";
+    private static final String PASSWORD = "pasabocaAntojitos";
 
     public LinkedList<Factura> getDatos() {
         LinkedList<Factura> data = new LinkedList<>();
