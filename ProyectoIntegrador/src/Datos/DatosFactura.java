@@ -37,7 +37,7 @@ public class DatosFactura {
 
     public void guardarFactura(Factura factura) {
         String sql = "INSERT INTO FACTURA (idFactura, subtotal, iva, referenciaProducto, idUsuario, idVenta) VALUES (?, ?, ?, ?, ?, ?)";
-
+        boolean añadirFactura
         try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, factura.getIdFactura());
@@ -66,7 +66,7 @@ public class DatosFactura {
         }
     }
 
-    public void actualizarFactura(Factura factura) {
+    public boolean actualizarFactura(Factura factura) {
         String sql = "UPDATE FACTURA SET idUsuario = ?, subtotal = ?, iva = ?, referenciaProducto = ? WHERE idFactura = ? AND idVenta = ?";
 
         try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
@@ -84,5 +84,6 @@ public class DatosFactura {
         } catch (SQLException e) {
             System.out.println("Error al actualizar la factura en la base de datos: " + e.getMessage());
         }
+		return false;
     }
 }
